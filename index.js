@@ -17,63 +17,61 @@ const sequelize = new Sequelize(POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, {
 });
 
 const csv = `
-team			 
-id	name		
-1	Real SLC		
-			
-account			
-id	name		
-1	Tyson the coach		
-2	Miles the older kid		
-3	Henry the smaller kid		
-4	Kevin the father of Henry		
-5	Ana the helper		
-			
-user_role			
-id	granted_to	in_behalf_of	role_id
+team
+id	name
+1	Real SLC
+
+account
+id	name
+1	Tyson the coach
+2	Miles the older kid
+3	Henry the smaller kid
+4	Kevin the father of Henry
+5	Ana the helper
+
+account_role
+id	granted_to_id	in_behalf_of_id	role_id
 1	2	2	4
 2	3	3	5
-3	4	3	5
-			
-role			
-id	name		
-1	teamCoach		
-2	teamHelper		
-3	teamPlayer		
-4	userEdit		
-5	userView		
-			
-permission			
-id	name		
-1	TEAM_UPDATE_ROSTER		
-2	TEAM_ADMIN		
-3	TEAM_VIEW_GAMES		
-4	USER_UPDATE_NAME		
-5	USER_UPDATE_AVATAR		
-6	PROXY_FULL_		
-			
-role_permission			
-id	role_id	permission_id	
-1	1	1	
-2	1	2	
-3	1	3	
-4	2	1	
-5	2	3	
-			
-team_roster			
-id	team_id	user_id	
-1	1	1	
-2	1	2	
-3	1	3	
-4	1	5	
-			
-team_role			
-id	user_id	role_id	
-1	1	1	
-2	1	3	
-3	2	3	
-4	3	3	
-5	5	2	
+3	4	3	4
+
+role
+id	name
+1	teamCoach
+2	teamHelper
+3	teamPlayer
+4	userEdit
+5	userView
+
+permission
+id	name	type
+1	UPDATE_ROSTER	team
+2	ADMIN	team
+3	VIEW_GAMES	team
+4	UPDATE_NAME	account
+5	UPDATE_AVATAR	account
+6	VIEW	account
+
+role_permission
+id	role_id	permission_id
+1	1	1
+2	1	2
+3	1	3
+4	2	1
+5	2	3
+6	3	3
+7	4	4
+8	4	5
+9	5	6
+10	4	6
+
+team_role
+id	user_id	role_id	team_id
+1	1	1	1
+2	1	3	1
+3	2	3	1
+4	3	3	1
+5	5	2	1
 `;
 
 main().catch(console.error);
